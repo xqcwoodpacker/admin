@@ -4,6 +4,8 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -204,4 +206,121 @@ input:checked + .slider:before {
 /* Additional Margin Styling */
 form {
     margin-top: 20px;
+}
+
+/* General Layout and Sidebar */
+.sidebar {
+    width: 250px;
+    background: #11265b;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+}
+
+.sidebar a:hover {
+    background: #0d1b41;
+    border-radius: 5px;
+}
+
+.content {
+    margin-left: 260px;
+    padding: 20px;
+    background: #f8f9fa;
+    flex-grow: 1;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #ffffff;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 33px;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+}
+
+.admin-profile i {
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+.toggle-sidebar {
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 20px;
+    display: block;
+    z-index: 999;
+}
+
+.sidebar.closed {
+    transform: translateX(-100%);
+}
+
+.content.expanded {
+    margin-left: 0;
+}
+
+.toggle-sidebar-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #11265b;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    display: block;
+}
+
+.content.expanded .topbar {
+    padding-left: 60px;
+    margin-bottom: 33px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .sidebar.closed {
+        transform: translateX(-100%);
+    }
+
+    .content.expanded {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 1200px) {
+    .h3,
+    h3 {
+        font-size: 1.75rem;
+        position: relative;
+        left: 50px !important;
+        top: 11px !important;
+    }
+}
+
+.sidebar a {
+    border: 1px solid white;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 15px;
 }

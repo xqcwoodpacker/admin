@@ -81,6 +81,10 @@ if ($_FILES['thumb_image']['error'] == UPLOAD_ERR_OK) {
 
     $old_image = $post['thumb_img'];
 
+    if (!empty($old_image) && file_exists($old_image)) {
+        unlink($old_image);  // Delete the old image file from the server
+    }
+
     $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/img'];
     if (!in_array($_FILES['thumb_image']['type'], $allowedTypes)) {
         abort('Invalid image type. Only JPG, PNG, JPEG and IMG files are allowed.', $id);

@@ -10,6 +10,7 @@
 session_start();
 if (!isset($_SESSION['admin'])) {
     header('location:login.php');
+    exit;
 }
 
 require 'db.php';
@@ -91,7 +92,6 @@ if (!empty($_FILES["thumb_image"]["name"])) {
 } else {
     abort('Thumbnail image is required');
 }
-
 
 $slug = createSlug($title);
 $meta_description = $_POST['meta_description'];

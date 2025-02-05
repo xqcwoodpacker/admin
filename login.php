@@ -6,6 +6,11 @@ if(isset($_SESSION['admin'])){
     exit();
 }
 
+if (isset($_SESSION['error'])) {
+    echo "<script>alert('" . $_SESSION['error'] . "');</script>";
+    unset($_SESSION['error']);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

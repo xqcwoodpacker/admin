@@ -3,6 +3,7 @@
 session_start();
 if (!isset($_SESSION['admin'])) {
     header('location:login.php');
+    exit;
 }
 
 require 'db.php';
@@ -17,10 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("si", $status, $id);
 
         if (!$stmt->execute()) {
-            echo "Error: " . $conn->error;
+            $_SESSION['error'] = "Error updating post status.";
+            header('location:admin.php');
+            exit;
         }
     } else {
-        echo "Error: " . $conn->error;
+        $_SESSION['error'] = "Error updating post status.";
+        header('location:admin.php');
+        exit;
     }
 }
-?>

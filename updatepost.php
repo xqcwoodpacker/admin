@@ -65,10 +65,10 @@ if (isset($_SESSION['error'])) {
         <form action="updatepost_script.php?id=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
 
             <div id="editor-container"><?php echo $post['content']; ?></div>
-            <input type="hidden" name="content" id="content" required>
+            <input type="hidden" name="content" id="content">
 
             <label for="title">Title:</label>
-            <input type="text" name="title" value="<?php echo $post['title']; ?>" required>
+            <input type="text" name="title" value="<?php echo $post['title']; ?>">
 
             <label for="category">Category:</label>
             <select name="category" id="category">

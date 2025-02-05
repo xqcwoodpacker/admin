@@ -6,7 +6,7 @@ if (!isset($_SESSION['admin'])) {
 
 if (isset($_SESSION['error'])) {
     echo "<script>alert('" . $_SESSION['error'] . "');</script>";
-    unset($_SESSION['error']);  // Unset the session variable after showing the message
+    unset($_SESSION['error']);
 }
 ?>
 <!DOCTYPE html>
@@ -34,12 +34,12 @@ if (isset($_SESSION['error'])) {
         <form method="POST" action="addpost_script.php" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Post Title</label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="Enter title" required>
+                <input type="text" name="title" id="title" class="form-control" placeholder="Enter title">
             </div>
 
             <div class="form-group">
                 <label for="category">Category</label>
-                <select name="category" id="category" class="form-select" required>
+                <select name="category" id="category" class="form-select">
                     <option selected disabled>Select Category</option>
                     <option value="Astrology">Astrology</option>
                     <option value="Business">Business</option>
@@ -67,7 +67,7 @@ if (isset($_SESSION['error'])) {
 
             <div class="form-group">
                 <label for="thumb_image">Thumbnail Image</label>
-                <input type="file" name="thumb_image" id="thumb_image" class="form-control" required>
+                <input type="file" name="thumb_image" id="thumb_image" class="form-control">
             </div>
 
             <div class="form-group">

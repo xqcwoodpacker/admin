@@ -40,7 +40,7 @@ $result = $conn->query($sql);
         <!-- <span class="toggle-sidebar" id="toggleSidebar"><i class="fa fa-bars"></i></span> -->
         <h4>Admin Panel</h4>
         <a href="<?php echo $_SERVER['PHP_SELF'] ?>">Posts</a>
-    </div>
+    </div>  
     <div class="content" id="content">
 
         <div class="topbar">

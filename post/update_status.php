@@ -2,11 +2,11 @@
 
 session_start();
 if (!isset($_SESSION['admin'])) {
-    header('location:login.php');
+    header('location:../login.php');
     exit;
 }
 
-require 'db.php';
+require '../db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
@@ -18,13 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("si", $status, $id);
 
         if (!$stmt->execute()) {
-            $_SESSION['error'] = "Error updating post status.";
-            header('location:admin.php');
+            echo json_encode(["status" => "error", "message" => "Error updating post status."]);
+            exit;
+        }else{
+            echo json_encode(["status" => "success", "message" => "Post status updated successfully."]);
             exit;
         }
     } else {
-        $_SESSION['error'] = "Error updating post status.";
-        header('location:admin.php');
+        echo json_encode(["status" => "error", "message" => "Error updating post status."]);
         exit;
     }
 }

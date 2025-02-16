@@ -4,7 +4,7 @@ require 'db.php';
 session_start();
 
 if (isset($_SESSION['admin'])) {
-    header('location: admin.php');
+    header('location: post/post.php');
     exit();
 }
 
@@ -26,7 +26,7 @@ if ($result->num_rows > 0) {
 
     if (password_verify($password, $row['pass'])) {
         $_SESSION['admin'] = $name;
-        header('location: admin.php');
+        header('location: dashboard.php');
         exit;
     } else {
         $_SESSION['error'] = 'Invalid username or password';

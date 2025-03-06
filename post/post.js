@@ -227,7 +227,7 @@ $(document).ready(function () {
 
         //preselect tags
         var tags = String(button.data('tags')).split(',');
-        console.log(tags);
+        //console.log(tags);
         
         // Initialize Choices.js only if it hasn't been initialized yet
         if (!update_choices) {

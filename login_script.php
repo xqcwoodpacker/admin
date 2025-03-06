@@ -4,7 +4,7 @@ require 'db.php';
 session_start();
 
 if (isset($_SESSION['admin'])) {
-    header('location: post/post.php');
+    header('location: dashboard.php');
     exit();
 }
 

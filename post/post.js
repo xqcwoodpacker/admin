@@ -58,6 +58,7 @@ function showMessage(type, message) {
     }, 10000);
 }
 
+// validate file size
 $('input[type="file"]').on('change', function() {
     const fileSize = this.files[0].size / 1024 / 1024; // in MB
     if (fileSize > 5) {

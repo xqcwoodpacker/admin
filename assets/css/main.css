@@ -356,6 +356,11 @@ form {
     right: 10px;
     padding: 0;
     margin: 0;
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.alert .close-btn:hover {
+    color: #000; /* Change color on hover */
 }
 
 .alert-success {

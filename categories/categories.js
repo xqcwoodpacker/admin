@@ -44,6 +44,10 @@ function load() {
             $("#mainDiv").html(data).fadeIn('slow');
             $('#categoriesTable').DataTable({
                 "paging": true,
+                "columnDefs": [
+                    { "type": "num", "targets": 0 }
+                ],
+                "order": [[0, "desc"]],
                 "ordering": true,
                 "info": true,
                 "searching": true

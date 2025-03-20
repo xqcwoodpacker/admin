@@ -44,6 +44,10 @@ function load() {
             $("#mainDiv").html(data).fadeIn('slow');
             $('#tagsTable').DataTable({
                 "paging": true,
+                "columnDefs": [
+                    { "type": "num", "targets": 0 }
+                ],
+                "order": [[0, "desc"]],
                 "ordering": true,
                 "info": true,
                 "searching": true
@@ -161,7 +165,7 @@ $(document).ready(function () {
         var button = $(event.relatedTarget);
 
         // console.log(button.data('tag'));
-        
+
         var id = button.data('id');
         $('#editId').val(id);
 

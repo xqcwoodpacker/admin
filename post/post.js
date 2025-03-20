@@ -36,7 +36,9 @@ function showMessage(type, message) {
         alert.addClass('alert-info');
     }
 
-    alert.text(message);
+    // Wrap the message in a span with class "message-text"
+    var messageText = $('<span class="message-text"></span>').text(message);
+    alert.append(messageText);
 
     var closeButton = $('<button class="close-btn">&times;</button>');
     alert.append(closeButton);
@@ -56,6 +58,13 @@ function showMessage(type, message) {
     }, 10000);
 }
 
+$('input[type="file"]').on('change', function() {
+    const fileSize = this.files[0].size / 1024 / 1024; // in MB
+    if (fileSize > 5) {
+        showMessage('error','File size exceeds 5 MB. Please select a smaller file.');
+      $(this).val(''); // Clear the input
+    }
+  });
 
 
 $(document).ready(function () {
@@ -200,8 +209,12 @@ $(document).ready(function () {
                     showMessage(data.status, data.message);
                     load();
                 },
-                error: function (xhr, status, error) {
-                    alert('An error occurred with the request.');
+                error: function(xhr, status, error) {
+                    if (xhr.responseText.indexOf('POST Content-Length') > -1) {
+                        $("#mainDiv").html('<div class="alert alert-danger">File too large. Maximum upload size is 40 MB.</div>');
+                    } else {
+                        $("#mainDiv").html('<div class="alert alert-danger">An error occurred: ' + error + '</div>');
+                    }
                 },
                 complete: function () {
                     $("#deletePostBtn").removeAttr("disabled");

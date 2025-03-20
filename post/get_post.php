@@ -13,6 +13,7 @@ $sql = "
     LEFT JOIN posts_tags pt ON p.id = pt.post_id
     LEFT JOIN tags t ON pt.tag_id = t.id
     GROUP BY p.id
+    ORDER BY p.id DESC
 ";
 $result = $conn->query($sql);
 

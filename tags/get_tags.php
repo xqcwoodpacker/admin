@@ -7,7 +7,7 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-$sql = "SELECT * FROM tags";
+$sql = "SELECT * FROM tags ORDER BY id DESC";
 $result = $conn->query($sql);
 
 

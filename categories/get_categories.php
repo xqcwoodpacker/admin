@@ -7,7 +7,7 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-$sql = "SELECT * FROM categories";
+$sql = "SELECT * FROM categories ORDER BY id DESC";
 $result = $conn->query($sql);
 
 

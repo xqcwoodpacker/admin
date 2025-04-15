@@ -59,13 +59,13 @@ function showMessage(type, message) {
 }
 
 // validate file size
-$('input[type="file"]').on('change', function() {
+$('input[type="file"]').on('change', function () {
     const fileSize = this.files[0].size / 1024 / 1024; // in MB
     if (fileSize > 5) {
-        showMessage('error','File size exceeds 5 MB. Please select a smaller file.');
-      $(this).val(''); // Clear the input
+        showMessage('error', 'File size exceeds 5 MB. Please select a smaller file.');
+        $(this).val(''); // Clear the input
     }
-  });
+});
 
 
 $(document).ready(function () {
@@ -73,11 +73,47 @@ $(document).ready(function () {
 
     //quill init
     var add_quill = new Quill('#editor-container-add', {
-        theme: 'snow'
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+                [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+                [{ 'direction': 'rtl' }],                         // text direction
+                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults
+                [{ 'font': [] }],
+                [{ 'align': [] }],
+                ['clean'],                                         // remove formatting button
+                ['link', 'image', 'video']                         // link and image, video
+            ]
+        }
     });
 
     var update_quill = new Quill('#editor-container-update', {
-        theme: 'snow'
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+                [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+                [{ 'direction': 'rtl' }],                         // text direction
+                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults
+                [{ 'font': [] }],
+                [{ 'align': [] }],
+                ['clean'],                                         // remove formatting button
+                ['link', 'image', 'video']                         // link and image, video
+            ]
+        }
     });
 
     // Initialize the tags input plugin
@@ -210,12 +246,8 @@ $(document).ready(function () {
                     showMessage(data.status, data.message);
                     load();
                 },
-                error: function(xhr, status, error) {
-                    if (xhr.responseText.indexOf('POST Content-Length') > -1) {
-                        $("#mainDiv").html('<div class="alert alert-danger">File too large. Maximum upload size is 40 MB.</div>');
-                    } else {
-                        $("#mainDiv").html('<div class="alert alert-danger">An error occurred: ' + error + '</div>');
-                    }
+                error: function (xhr, status, error) {
+
                 },
                 complete: function () {
                     $("#deletePostBtn").removeAttr("disabled");
@@ -246,7 +278,7 @@ $(document).ready(function () {
         //preselect tags
         var tags = String(button.data('tags')).split(',');
         //console.log(tags);
-        
+
         // Initialize Choices.js only if it hasn't been initialized yet
         if (!update_choices) {
             update_choices = new Choices('#tags-update', { removeItemButton: true });

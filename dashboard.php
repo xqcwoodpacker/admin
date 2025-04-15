@@ -46,7 +46,6 @@ $totalTags = $tagCountResult->fetch_assoc()['total_tags'];
 </head>
 
 <body>
-
     <!-- alert -->
     <div id="messageContainer" class="alert-container"></div>
 

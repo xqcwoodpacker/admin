@@ -69,12 +69,12 @@ function getTagsOptions($conn)
     <!-- font-awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <!-- quill -->
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
-
+    <!-- choice -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
+    <!-- quill -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" /> -->
 
     <!-- custom css -->
     <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
@@ -131,7 +131,10 @@ function getTagsOptions($conn)
         src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
     <!-- quill -->
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script> -->
+
+    <!-- tinymce -->
+    <script src="https://cdn.tiny.cloud/1/tdq7d3va68zwwsfmfrfcj8ki7ljetiyszvrv6geh3hl4v2e6/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
     <!-- custom css -->
     <script type="text/javascript" charset="utf8" src="post.js"></script>

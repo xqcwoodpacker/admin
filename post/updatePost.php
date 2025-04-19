@@ -55,11 +55,11 @@ if ($stmt = $conn->prepare($sql)) {
     exit;
 }
 
-if (($_POST['editContent']) == '<p><br></p>') {
+if (!empty($_POST['editContent'])) {
+    $content = $_POST['editContent'];
+} else {
     echo json_encode(["status" => "error", "message" => "Content is required"]);
     exit;
-} else {
-    $content = $_POST['editContent'];
 }
 
 if (!empty($_POST['editTitle'])) {

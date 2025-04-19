@@ -14,7 +14,6 @@ try {
 // $pass='admin123';
 // $password_hash=password_hash($pass,PASSWORD_DEFAULT);
 // $q="insert into admin_details(name,pass) values(?,?)";
-
 // $stmt = $con->prepare($q);
 // $stmt->bind_param('ss', $name, $password_hash);
 // $stmt->execute();

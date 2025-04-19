@@ -71,48 +71,115 @@ $('input[type="file"]').on('change', function () {
 $(document).ready(function () {
     load();
 
-    //quill init
-    var add_quill = new Quill('#editor-container-add', {
-        theme: 'snow',
-        modules: {
-            toolbar: [
-                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-                ['blockquote', 'code-block'],
-                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-                [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-                [{ 'direction': 'rtl' }],                         // text direction
-                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults
-                [{ 'font': [] }],
-                [{ 'align': [] }],
-                ['clean'],                                         // remove formatting button
-                ['link', 'image', 'video']                         // link and image, video
-            ]
+    ///////////////////////////////////////////////
+
+    //addpost tinymce init
+    tinymce.init({
+        selector: '#postContent',
+        plugins: 'advlist link image lists table',
+        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image table',
+        height: 500,
+        paste_data_images: true,
+        // Enable image alignment options
+        image_advtab: true,
+        // Configure image upload handler
+        images_upload_handler: function (blobInfo, progress) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.readAsDataURL(blobInfo.blob());
+            });
+        },
+        // Style configuration for proper text wrapping
+        content_style: `
+            body { font-family:Helvetica,Arial,sans-serif; font-size:14px }
+            img { 
+                max-width: 100%; 
+                height: auto;
+            }
+            /* Text wrapping styles */
+            .image-left {
+                float: left;
+                margin: 0 15px 15px 0;
+            }
+            .image-right {
+                float: right;
+                margin: 0 0 15px 15px;
+            }
+            .image-center {
+                display: block;
+                margin: 0 auto 15px;
+            }
+        `,
+        // Setup to handle image alignment
+        setup: function(editor) {
+            editor.on('init', function() {
+                console.log('Editor initialized');
+                
+                // Add alignment buttons to image toolbar
+                editor.ui.registry.addContextToolbar('imagealignment', {
+                    predicate: function (node) {
+                        return node.nodeName === 'IMG';
+                    },
+                    items: 'alignleft aligncenter alignright',
+                    position: 'node'
+                });
+            });
         }
     });
 
-    var update_quill = new Quill('#editor-container-update', {
-        theme: 'snow',
-        modules: {
-            toolbar: [
-                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-                ['blockquote', 'code-block'],
-                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-                [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-                [{ 'direction': 'rtl' }],                         // text direction
-                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults
-                [{ 'font': [] }],
-                [{ 'align': [] }],
-                ['clean'],                                         // remove formatting button
-                ['link', 'image', 'video']                         // link and image, video
-            ]
+    //updatepost tinymce init
+    tinymce.init({
+        selector: '#editContent',
+        plugins: 'advlist link image lists table',
+        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image table',
+        height: 500,
+        paste_data_images: true,
+        // Enable image alignment options
+        image_advtab: true,
+        // Configure image upload handler
+        images_upload_handler: function (blobInfo, progress) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.readAsDataURL(blobInfo.blob());
+            });
+        },
+        // Style configuration for proper text wrapping
+        content_style: `
+            body { font-family:Helvetica,Arial,sans-serif; font-size:14px }
+            img { 
+                max-width: 100%; 
+                height: auto;
+            }
+            /* Text wrapping styles */
+            .image-left {
+                float: left;
+                margin: 0 15px 15px 0;
+            }
+            .image-right {
+                float: right;
+                margin: 0 0 15px 15px;
+            }
+            .image-center {
+                display: block;
+                margin: 0 auto 15px;
+            }
+        `,
+        // Setup to handle image alignment
+        setup: function(editor) {
+            editor.on('init', function() {
+                console.log('Editor initialized');
+                
+                // Add alignment buttons to image toolbar
+                editor.ui.registry.addContextToolbar('imagealignment', {
+                    predicate: function (node) {
+                        return node.nodeName === 'IMG';
+                    },
+                    items: 'alignleft aligncenter alignright',
+                    position: 'node'
+                });
+            });
         }
     });
 
@@ -171,9 +238,10 @@ $(document).ready(function () {
             var form = $('#addPostForm')[0];
             var formData = new FormData(form); // Create FormData instance
 
-            // Append Quill content to FormData
-            var content = add_quill.root.innerHTML;
-            formData.append('content', content); // Add Quill content to FormData
+            ///////////////////////////////////////////////////////////////////////////////
+            var content = tinymce.get('postContent').getContent();
+            formData.append('content', content);
+            ///////////////////////////////////////////////////////////////////////////////
 
             $.ajax({
                 type: "POST",
@@ -208,7 +276,9 @@ $(document).ready(function () {
     //addPostModal on Hide
     $('#addPostModal').on('hidden.bs.modal', function () {
         $('#addPostForm')[0].reset();
-        add_quill.root.innerHTML = '';
+        if (tinymce.get('postContent')) {
+            tinymce.get('postContent').setContent('');
+        }
     });
 
     //deletePostModal on Show
@@ -257,105 +327,107 @@ $(document).ready(function () {
         });
     });
 
-    //updatePostModal on Show
-    $('#updatePostModal').on('show.bs.modal', function (event) {
-        $('#preview_image').html('');
-        var button = $(event.relatedTarget);
+   //updatePostModal on Show
+$('#updatePostModal').on('show.bs.modal', function (event) {
+    $('#preview_image').html('');
+    var button = $(event.relatedTarget);
 
-        var id = button.data('id');
-        $('#editId').val(id);
+    var id = button.data('id');
+    $('#editId').val(id);
 
-        var content = button.data('content');
-        $('#editContent').val(content);
-        update_quill.root.innerHTML = content;
+    var content = button.data('content');
+    if (tinymce.get('editContent')) {
+        tinymce.get('editContent').setContent(content || '');
+    }
 
-        var title = button.data('title');
-        $('#editTitle').val(title);
+    var title = button.data('title');
+    $('#editTitle').val(title);
 
-        var category = button.data('category');
-        $('#editCategory').val(category);
+    var category = button.data('category');
+    $('#editCategory').val(category);
 
-        //preselect tags
-        var tags = String(button.data('tags')).split(',');
-        //console.log(tags);
+    //preselect tags
+    var tags = String(button.data('tags')).split(',');
 
-        // Initialize Choices.js only if it hasn't been initialized yet
-        if (!update_choices) {
-            update_choices = new Choices('#tags-update', { removeItemButton: true });
+    // Initialize Choices.js only if it hasn't been initialized yet
+    if (!update_choices) {
+        update_choices = new Choices('#tags-update', { removeItemButton: true });
+    }
+
+    // Preselect the tags in the Choices.js multi-select
+    tags.forEach(function (tag) {
+        update_choices.setChoiceByValue(tag);
+    });
+
+    var meta_description = button.data('meta_description');
+    $('#edit_meta_description').val(meta_description);
+
+    var meta_keywords = button.data('meta_keywords');
+    $('#edit_meta_keywords').val(meta_keywords);
+
+    var thumb_img = button.data('thumb_image');
+    if (!thumb_img === undefined || thumb_img === null) {
+        $('#preview_image').html('No image found');
+    } else {
+        $('#preview_image').html('<img src="' + thumb_img + '" alt="thumb image" class="img-thumbnail" style="width: 100px; height: 100px;">');
+    }
+    
+    $('#edit_thumb_image').on('change', function () {
+        var file = $(this)[0].files[0];
+        var fileReader = new FileReader();
+        fileReader.onload = function () {
+            $('#preview_image').html('<img src="' + fileReader.result + '" alt="thumb image" class="img-thumbnail" style="width: 100px; height: 100px;">');
         }
+        fileReader.readAsDataURL(file);
+    });
+});
 
-        // Preselect the tags in the Choices.js multi-select
-        tags.forEach(function (tag) {
-            update_choices.setChoiceByValue(tag);  // Select the option by its value
-        });
+// Form submission handler (move outside the modal show event)
+$('#updatePostForm').submit(function (event) {
+    event.preventDefault();
+    var form = $('#updatePostForm')[0];
+    var formData = new FormData(form);
 
-        var meta_description = button.data('meta_description');
-        $('#edit_meta_description').val(meta_description);
+    // Get content from the correct editor ID
+    var content = tinymce.get('editContent').getContent();
+    formData.append('editContent', content);
 
-        var meta_keywords = button.data('meta_keywords');
-        $('#edit_meta_keywords').val(meta_keywords);
+    if (isProcessing) return;
+    isProcessing = true;
 
-        var thumb_img = button.data('thumb_image');
-        if (!thumb_img === undefined || thumb_img === null) {
-            $('#preview_image').html('No image found');
-        } else {
-            $('#preview_image').html('<img src="' + thumb_img + '" alt="thumb image" class="img-thumbnail" style="width: 100px; height: 100px;">');
-        }
-        $('#edit_thumb_image').on('change', function () {
-            var file = $(this)[0].files[0];
-            var fileReader = new FileReader();
-            fileReader.onload = function () {
-                $('#preview_image').html('<img src="' + fileReader.result + '" alt="thumb image" class="img-thumbnail" style="width: 100px; height: 100px;">');
+    $.ajax({
+        type: "POST",
+        url: "updatePost.php",
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function () {
+            $("#updatePostBtn").attr("disabled", true);
+        },
+        success: function (response) {
+            var data = JSON.parse(response);
+            if (data.status === 'success') {
+                $('#updatePostModal').modal('hide');
             }
-            fileReader.readAsDataURL(file);
-        });
-
-        //update post form submission
-        $('#updatePostForm').submit(function (event) {
-            event.preventDefault();
-            var form = $('#updatePostForm')[0];
-            var formData = new FormData(form); // Create FormData instance
-
-            // Append Quill content to FormData
-            var content = update_quill.root.innerHTML;
-            formData.append('editContent', content); // Add Quill content to FormData
-
-            if (isProcessing) return;
-            isProcessing = true;
-
-            $.ajax({
-                type: "POST",
-                url: "updatePost.php",
-                data: formData,
-                processData: false, // Don't process the data
-                contentType: false, // Don't set content type (important for FormData)
-                beforeSend: function () {
-                    $("#updatePostBtn").attr("disabled", true);
-                },
-                success: function (response) {
-                    var data = JSON.parse(response);
-                    if (data.status === 'success') {
-                        $('#updatePostModal').modal('hide');
-                    }
-                    showMessage(data.status, data.message);
-                    load();
-                },
-                error: function (xhr, status, error) {
-                    alert('An error occurred with the request.');
-                },
-                complete: function () {
-                    // Re-enable the button and set processing flag to false
-                    $("#updatePostBtn").removeAttr("disabled");
-                    isProcessing = false;
-                }
-            });
-        });
+            showMessage(data.status, data.message);
+            load();
+        },
+        error: function (xhr, status, error) {
+            alert('An error occurred with the request.');
+        },
+        complete: function () {
+            $("#updatePostBtn").removeAttr("disabled");
+            isProcessing = false;
+        }
     });
+});
 
-    //updatePostModal on Hide
-    $('#updatePostModal').on('hidden.bs.modal', function (event) {
-        $('#updatePostForm')[0].reset();
-        update_quill.root.innerHTML = '';
-    });
+//updatePostModal on Hide
+$('#updatePostModal').on('hidden.bs.modal', function (event) {
+    $('#updatePostForm')[0].reset();
+    if (tinymce.get('editContent')) {  
+        tinymce.get('editContent').setContent('');
+    }
+});
 
 });

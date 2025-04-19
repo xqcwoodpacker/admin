@@ -16,8 +16,10 @@
                     <div class="form-group">
                         <label>Post Content</label>
                         <div id="editor-container-update"></div>
-                        <input type="hidden" name="editContent" id="editContent">
+                        <!-- <input type="hidden" name="editContent" id="editContent"> -->
                         <!-- Hidden field to store Quill content -->
+                         
+                        <textarea id="editContent" name="editContent"></textarea> 
                     </div>
 
                     <div class="form-group">

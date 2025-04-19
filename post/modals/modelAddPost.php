@@ -1,4 +1,5 @@
-<div class="modal fade modal-xl modal-dialog-scrollable" id="addPostModal">
+<!-- <div class="modal fade modal-xl modal-dialog-scrollable" id="addPostModal"> -->
+<div class="modal-dialog modal-fullscreen-sm-down" id="addPostModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,14 +7,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
                 <form method="POST" enctype="multipart/form-data" id="addPostForm">
                     <div class="form-group">
                         <label>Post Content</label>
-                        <div id="editor-container-add"></div>
-                        <input type="hidden" name="content" id="content"> <!-- Hidden field to store Quill content -->
+                        <!-- <div id="editor-container-add"></div> -->
+                        <textarea id="postContent" name="content"></textarea>  
                     </div>
-
                     <div class="form-group">
                         <label for="title">Post Title</label>
                         <input type="text" name="title" id="title" class="form-control" placeholder="Enter title">

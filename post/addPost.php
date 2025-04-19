@@ -27,11 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-if ($_POST['content'] == '<p><br></p>') {
+if (!empty($_POST['content'])) {
+    $content = $_POST['content'];
+} else {
     echo json_encode(["status" => "error", "message" => "Content is required"]);
     exit;
-} else {
-    $content = $_POST['content'];
 }
 
 if (!empty($_POST['title'])) {
@@ -100,7 +100,7 @@ $meta_keywords = htmlspecialchars($_POST['meta_keywords']);
 
 $sql = "INSERT INTO posts (slug, title, category, content, thumb_img, meta_description, meta_keywords) 
         VALUES (?,?,?,?,?,?,?)";
-        
+
 
 if ($stmt = $conn->prepare($sql)) {
     $stmt->bind_param("sssssss", $slug, $title, $category, $content, $thumb_img, $meta_description, $meta_keywords);

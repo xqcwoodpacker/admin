@@ -47,7 +47,7 @@ if ($result->num_rows > 0) {
             <td>" . $row["id"] . "</td>
             <td>" . $row["title"] . "</td>
             <td>" . $row["category_name"] . "</td>
-            <td><img src='" . $row["thumb_img"] . "' alt='Thumbnail' class='img-thumbnail' width='50'></td>
+            <td><img src='../uploads/" . $row["thumb_img"] . "' alt='Thumbnail' class='img-thumbnail' width='50'></td>
 
             <td class='action-btn1 text-center'>
                 <a href='#updatePostModal'
@@ -55,10 +55,12 @@ if ($result->num_rows > 0) {
                 data-id='" . $row['id'] . "'
                 data-content='" . $row['content'] . "'
                 data-title='" . $row['title'] . "'
+                data-slug='" . $row['slug'] . "'
                 data-category='" . $row['category'] . "'
                 data-tags='" . $tag_ids . "'
                 data-meta_description='" . $row['meta_description'] . "'
                 data-meta_keywords='" . $row['meta_keywords'] . "'
+                data-faq='" . $row['faq_schema'] . "'
                 data-thumb_image='" . $row['thumb_img'] . "'
 
                 class='btn btn-outline-warning' style='display: inline-block;margin-right: 10px;' data-bs-toggle='modal'>

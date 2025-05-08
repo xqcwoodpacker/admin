@@ -69,6 +69,13 @@ if (!empty($_POST['editTitle'])) {
     exit;
 }
 
+if (!empty($_POST['edit_slug'])) {
+    $slug = createSlug($_POST['edit_slug']);
+} else {
+    echo json_encode(["status" => "error", "message" => "Slug is required"]);
+    exit;
+}
+
 if (!empty($_POST['editCategory'])) {
     $category = $_POST['editCategory'];
 } else {
@@ -126,14 +133,14 @@ if ($_FILES['edit_thumb_image']['error'] == UPLOAD_ERR_OK) {
     $thumb_img = $post['thumb_img'];
 }
 
-$slug = createSlug($title);
 $meta_description = $_POST['edit_meta_description'];
 $meta_keywords = $_POST['edit_meta_keywords'];
+$faq = $_POST['edit_faq'];
 
-$sql = "UPDATE posts SET slug = ?, title = ?, category = ?, content = ?, thumb_img = ?, meta_description = ?, meta_keywords = ? WHERE id = ?";
+$sql = "UPDATE posts SET slug = ?, title = ?, category = ?, content = ?, thumb_img = ?, meta_description = ?, meta_keywords = ?,faq_schema = ? WHERE id = ?";
 
 if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("sssssssi", $slug, $title, $category, $content, $thumb_img, $meta_description, $meta_keywords, $id);
+    $stmt->bind_param("ssssssssi", $slug, $title, $category, $content, $thumb_img, $meta_description, $meta_keywords, $faq, $id);
 
     if ($stmt->execute()) {
 

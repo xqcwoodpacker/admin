@@ -18,18 +18,23 @@
                         <div id="editor-container-update"></div>
                         <!-- <input type="hidden" name="editContent" id="editContent"> -->
                         <!-- Hidden field to store Quill content -->
-                         
-                        <textarea id="editContent" name="editContent"></textarea> 
+
+                        <textarea id="editContent" name="editContent"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="title">Post Title</label>
+                        <label for="editTitle">Post Title</label>
                         <input type="text" name="editTitle" id="editTitle" class="form-control"
                             placeholder="Enter title">
                     </div>
 
                     <div class="form-group">
-                        <label for="category">Category</label>
+                        <label for="edit_slug">Post Slug</label>
+                        <input type="text" name="edit_slug" id="edit_slug" class="form-control" placeholder="Enter slug">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editCategory">Category</label>
                         <select name="editCategory" id="editCategory" class="form-select">
                             <option selected disabled></option>
                             <?php echo getCategoriesOptions($conn); ?>
@@ -37,7 +42,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tags">Tags</label>
+                        <label for="tags-update">Tags</label>
                         <select class="form-multi-select" id="tags-update" multiple data-placeholder="Select tags..."
                             name="editTags[]">
                             <?php echo getTagsOptions($conn); ?>
@@ -45,19 +50,25 @@
                     </div>
 
                     <div class="form-group mt-4">
-                        <label for="meta_description">Meta Description</label>
+                        <label for="edit_meta_description">Meta Description</label>
                         <input type="text" name="edit_meta_description" id="edit_meta_description" class="form-control"
                             placeholder="Meta description">
                     </div>
 
                     <div class="form-group">
-                        <label for="meta_keywords">Meta Keywords</label>
+                        <label for="edit_meta_keywords">Meta Keywords</label>
                         <input type="text" name="edit_meta_keywords" id="edit_meta_keywords" class="form-control"
                             placeholder="Enter meta keywords">
                     </div>
 
                     <div class="form-group">
-                        <label for="thumb_image">Thumbnail Image</label>
+                        <label for="edit_faq">Post FAQ Schema</label>
+                        <textarea type="text" name="edit_faq" id="edit_faq" class="form-control"
+                            placeholder="Enter FAQ schema"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit_thumb_image">Thumbnail Image</label>
                         <input type="file" name="edit_thumb_image" id="edit_thumb_image" class="form-control">
                     </div>
                     <div id="preview_image">

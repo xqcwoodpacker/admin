@@ -1,5 +1,4 @@
-<!-- <div class="modal fade modal-xl modal-dialog-scrollable" id="addPostModal"> -->
-<div class="modal-dialog modal-fullscreen-sm-down" id="addPostModal">
+<div class="modal fade modal-xl modal-dialog-scrollable" id="addPostModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,6 +15,11 @@
                     <div class="form-group">
                         <label for="title">Post Title</label>
                         <input type="text" name="title" id="title" class="form-control" placeholder="Enter title">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="slug">Slug</label>
+                        <input type="text" name="slug" id="slug" class="form-control" placeholder="Enter slug">
                     </div>
 
                     <div class="form-group">
@@ -44,6 +48,12 @@
                         <label for="meta_keywords">Meta Keywords</label>
                         <input type="text" name="meta_keywords" id="meta_keywords" class="form-control"
                             placeholder="Enter meta keywords">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="faq">Post FAQ Schema</label>
+                        <textarea type="text" name="faq" id="faq" class="form-control"
+                            placeholder="Enter FAQ schema"></textarea>
                     </div>
 
                     <div class="form-group">

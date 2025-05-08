@@ -112,10 +112,8 @@ $(document).ready(function () {
             }
         `,
         // Setup to handle image alignment
-        setup: function(editor) {
-            editor.on('init', function() {
-                console.log('Editor initialized');
-                
+        setup: function (editor) {
+            editor.on('init', function () {
                 // Add alignment buttons to image toolbar
                 editor.ui.registry.addContextToolbar('imagealignment', {
                     predicate: function (node) {
@@ -167,10 +165,8 @@ $(document).ready(function () {
             }
         `,
         // Setup to handle image alignment
-        setup: function(editor) {
-            editor.on('init', function() {
-                console.log('Editor initialized');
-                
+        setup: function (editor) {
+            editor.on('init', function () {
                 // Add alignment buttons to image toolbar
                 editor.ui.registry.addContextToolbar('imagealignment', {
                     predicate: function (node) {
@@ -327,107 +323,113 @@ $(document).ready(function () {
         });
     });
 
-   //updatePostModal on Show
-$('#updatePostModal').on('show.bs.modal', function (event) {
-    $('#preview_image').html('');
-    var button = $(event.relatedTarget);
+    //updatePostModal on Show
+    $('#updatePostModal').on('show.bs.modal', function (event) {
+        $('#preview_image').html('');
+        var button = $(event.relatedTarget);
 
-    var id = button.data('id');
-    $('#editId').val(id);
+        var id = button.data('id');
+        $('#editId').val(id);
 
-    var content = button.data('content');
-    if (tinymce.get('editContent')) {
-        tinymce.get('editContent').setContent(content || '');
-    }
-
-    var title = button.data('title');
-    $('#editTitle').val(title);
-
-    var category = button.data('category');
-    $('#editCategory').val(category);
-
-    //preselect tags
-    var tags = String(button.data('tags')).split(',');
-
-    // Initialize Choices.js only if it hasn't been initialized yet
-    if (!update_choices) {
-        update_choices = new Choices('#tags-update', { removeItemButton: true });
-    }
-
-    // Preselect the tags in the Choices.js multi-select
-    tags.forEach(function (tag) {
-        update_choices.setChoiceByValue(tag);
-    });
-
-    var meta_description = button.data('meta_description');
-    $('#edit_meta_description').val(meta_description);
-
-    var meta_keywords = button.data('meta_keywords');
-    $('#edit_meta_keywords').val(meta_keywords);
-
-    var thumb_img = button.data('thumb_image');
-    if (!thumb_img === undefined || thumb_img === null) {
-        $('#preview_image').html('No image found');
-    } else {
-        $('#preview_image').html('<img src="' + thumb_img + '" alt="thumb image" class="img-thumbnail" style="width: 100px; height: 100px;">');
-    }
-    
-    $('#edit_thumb_image').on('change', function () {
-        var file = $(this)[0].files[0];
-        var fileReader = new FileReader();
-        fileReader.onload = function () {
-            $('#preview_image').html('<img src="' + fileReader.result + '" alt="thumb image" class="img-thumbnail" style="width: 100px; height: 100px;">');
+        var content = button.data('content');
+        if (tinymce.get('editContent')) {
+            tinymce.get('editContent').setContent(content || '');
         }
-        fileReader.readAsDataURL(file);
-    });
-});
 
-// Form submission handler (move outside the modal show event)
-$('#updatePostForm').submit(function (event) {
-    event.preventDefault();
-    var form = $('#updatePostForm')[0];
-    var formData = new FormData(form);
+        var title = button.data('title');
+        $('#editTitle').val(title);
 
-    // Get content from the correct editor ID
-    var content = tinymce.get('editContent').getContent();
-    formData.append('editContent', content);
+        var slug = button.data('slug');
+        $('#edit_slug').val(slug);
 
-    if (isProcessing) return;
-    isProcessing = true;
+        var category = button.data('category');
+        $('#editCategory').val(category);
 
-    $.ajax({
-        type: "POST",
-        url: "updatePost.php",
-        data: formData,
-        processData: false,
-        contentType: false,
-        beforeSend: function () {
-            $("#updatePostBtn").attr("disabled", true);
-        },
-        success: function (response) {
-            var data = JSON.parse(response);
-            if (data.status === 'success') {
-                $('#updatePostModal').modal('hide');
+        //preselect tags
+        var tags = String(button.data('tags')).split(',');
+
+        // Initialize Choices.js only if it hasn't been initialized yet
+        if (!update_choices) {
+            update_choices = new Choices('#tags-update', { removeItemButton: true });
+        }
+
+        // Preselect the tags in the Choices.js multi-select
+        tags.forEach(function (tag) {
+            update_choices.setChoiceByValue(tag);
+        });
+
+        var meta_description = button.data('meta_description');
+        $('#edit_meta_description').val(meta_description);
+
+        var meta_keywords = button.data('meta_keywords');
+        $('#edit_meta_keywords').val(meta_keywords);
+
+        var faq = button.data('faq');
+        $('#edit_faq').val(faq);
+
+        var thumb_img = button.data('thumb_image');
+        if (!thumb_img === undefined || thumb_img === null) {
+            $('#preview_image').html('No image found');
+        } else {
+            $('#preview_image').html('<img src="../uploads/' + thumb_img + '" alt="thumb image" class="img-thumbnail" style="width: 100px; height: 100px;">');
+        }
+
+        $('#edit_thumb_image').on('change', function () {
+            var file = $(this)[0].files[0];
+            var fileReader = new FileReader();
+            fileReader.onload = function () {
+                $('#preview_image').html('<img src="' + fileReader.result + '" alt="thumb image" class="img-thumbnail" style="width: 100px; height: 100px;">');
             }
-            showMessage(data.status, data.message);
-            load();
-        },
-        error: function (xhr, status, error) {
-            alert('An error occurred with the request.');
-        },
-        complete: function () {
-            $("#updatePostBtn").removeAttr("disabled");
-            isProcessing = false;
+            fileReader.readAsDataURL(file);
+        });
+    });
+
+    // Form submission handler (move outside the modal show event)
+    $('#updatePostForm').submit(function (event) {
+        event.preventDefault();
+        var form = $('#updatePostForm')[0];
+        var formData = new FormData(form);
+
+        // Get content from the correct editor ID
+        var content = tinymce.get('editContent').getContent();
+        formData.append('editContent', content);
+
+        if (isProcessing) return;
+        isProcessing = true;
+
+        $.ajax({
+            type: "POST",
+            url: "updatePost.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+                $("#updatePostBtn").attr("disabled", true);
+            },
+            success: function (response) {
+                var data = JSON.parse(response);
+                if (data.status === 'success') {
+                    $('#updatePostModal').modal('hide');
+                }
+                showMessage(data.status, data.message);
+                load();
+            },
+            error: function (xhr, status, error) {
+                alert('An error occurred with the request.');
+            },
+            complete: function () {
+                $("#updatePostBtn").removeAttr("disabled");
+                isProcessing = false;
+            }
+        });
+    });
+
+    //updatePostModal on Hide
+    $('#updatePostModal').on('hidden.bs.modal', function (event) {
+        $('#updatePostForm')[0].reset();
+        if (tinymce.get('editContent')) {
+            tinymce.get('editContent').setContent('');
         }
     });
-});
-
-//updatePostModal on Hide
-$('#updatePostModal').on('hidden.bs.modal', function (event) {
-    $('#updatePostForm')[0].reset();
-    if (tinymce.get('editContent')) {  
-        tinymce.get('editContent').setContent('');
-    }
-});
 
 });

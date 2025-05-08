@@ -41,6 +41,13 @@ if (!empty($_POST['title'])) {
     exit;
 }
 
+if (!empty($_POST['slug'])) {
+    $slug = createSlug($_POST['slug']);
+} else {
+    echo json_encode(["status" => "error", "message" => "slug is required"]);
+    exit;
+}
+
 
 if (!empty($_POST['category'])) {
     $category = $_POST['category'];
@@ -94,16 +101,17 @@ if (!empty($_FILES["thumb_image"]["name"])) {
     exit;
 }
 
-$slug = createSlug($title);
+
 $meta_description = htmlspecialchars($_POST['meta_description']);
 $meta_keywords = htmlspecialchars($_POST['meta_keywords']);
+$faq = htmlspecialchars($_POST['faq']);
 
-$sql = "INSERT INTO posts (slug, title, category, content, thumb_img, meta_description, meta_keywords) 
-        VALUES (?,?,?,?,?,?,?)";
+$sql = "INSERT INTO posts (slug, title, category, content, thumb_img, meta_description, meta_keywords,faq_schema) 
+        VALUES (?,?,?,?,?,?,?,?)";
 
 
 if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("sssssss", $slug, $title, $category, $content, $thumb_img, $meta_description, $meta_keywords);
+    $stmt->bind_param("ssssssss", $slug, $title, $category, $content, $thumb_img, $meta_description, $meta_keywords, $faq); // Bind parameters
 
     if ($stmt->execute()) {
         $post_id = $stmt->insert_id;  // Get the ID of the newly inserted post

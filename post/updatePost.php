@@ -136,11 +136,12 @@ if ($_FILES['edit_thumb_image']['error'] == UPLOAD_ERR_OK) {
 $meta_description = $_POST['edit_meta_description'];
 $meta_keywords = $_POST['edit_meta_keywords'];
 $faq = $_POST['edit_faq'];
+$alt_tag = $_POST['edit_alt_tag'];
 
-$sql = "UPDATE posts SET slug = ?, title = ?, category = ?, content = ?, thumb_img = ?, meta_description = ?, meta_keywords = ?,faq_schema = ? WHERE id = ?";
+$sql = "UPDATE posts SET slug = ?, title = ?, category = ?, content = ?, thumb_img = ?, meta_description = ?, meta_keywords = ?, faq_schema = ?, alt_tag = ? WHERE id = ?";
 
 if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("ssssssssi", $slug, $title, $category, $content, $thumb_img, $meta_description, $meta_keywords, $faq, $id);
+    $stmt->bind_param("sssssssssi", $slug, $title, $category, $content, $thumb_img, $meta_description, $meta_keywords, $faq, $alt_tag, $id);
 
     if ($stmt->execute()) {
 

@@ -30,7 +30,8 @@
 
                     <div class="form-group">
                         <label for="edit_slug">Post Slug</label>
-                        <input type="text" name="edit_slug" id="edit_slug" class="form-control" placeholder="Enter slug">
+                        <input type="text" name="edit_slug" id="edit_slug" class="form-control"
+                            placeholder="Enter slug">
                     </div>
 
                     <div class="form-group">
@@ -71,9 +72,14 @@
                         <label for="edit_thumb_image">Thumbnail Image</label>
                         <input type="file" name="edit_thumb_image" id="edit_thumb_image" class="form-control">
                     </div>
-                    <div id="preview_image">
+                    <div id="preview_image"></div>
 
+                    <div class="form-group">
+                        <label for="edit_alt_tag">Alt Tag</label>
+                        <input type="text" name="edit_alt_tag" id="edit_alt_tag" class="form-control"
+                            placeholder="Enter Alt Tag">
                     </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

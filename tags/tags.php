@@ -17,13 +17,13 @@ require '../db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tags</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/cdn/bootstrap.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/cdn/jquery.dataTables.min.css">
 
     <!-- font-awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="../assets/cdn/all.min.css" rel="stylesheet">
 
     <!-- custom css -->
     <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
@@ -69,14 +69,14 @@ require '../db.php';
 
 
     <!-- jQuery -->
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="../assets/cdn/jquery-3.6.0.min.js"></script>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/cdn/bootstrap.bundle.min.js"></script>
 
     <!-- DataTables JS -->
     <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        src="../assets/cdn/jquery.dataTables.min.js"></script>
 
     <!-- custom css -->
     <script type="text/javascript" charset="utf8" src="tags.js"></script>

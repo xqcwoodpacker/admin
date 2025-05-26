@@ -61,6 +61,12 @@
                         <input type="file" name="thumb_image" id="thumb_image" class="form-control">
                     </div>
 
+                    <div class="form-group">
+                        <label for="alt_tag">Alt Tag</label>
+                        <input type="text" name="alt_tag" id="alt_tag" class="form-control"
+                            placeholder="Enter Alt Tag">
+                    </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

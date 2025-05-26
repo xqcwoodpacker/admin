@@ -1,4 +1,5 @@
 <?php
+
 // ini_set('display_errors', 1);
 // error_reporting(E_ALL);
 
@@ -61,20 +62,17 @@ function getTagsOptions($conn)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/cdn/bootstrap.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/cdn/jquery.dataTables.min.css">
 
     <!-- font-awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="../assets/cdn/all.min.css" rel="stylesheet">
 
     <!-- choice -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-
-    <!-- quill -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="../assets/cdn/choices.min.css">
+    <script src="../assets/cdn/choices.min.js"></script>
 
     <!-- custom css -->
     <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
@@ -121,17 +119,13 @@ function getTagsOptions($conn)
 
 
     <!-- jQuery -->
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="../assets/cdn/jquery-3.6.0.min.js"></script>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/cdn/bootstrap.bundle.min.js"></script>
 
     <!-- DataTables JS -->
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
-    <!-- quill -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script> -->
+    <script type="text/javascript" charset="utf8" src="../assets/cdn/jquery.dataTables.min.js"></script>
 
     <!-- tinymce -->
     <script src="https://cdn.tiny.cloud/1/tdq7d3va68zwwsfmfrfcj8ki7ljetiyszvrv6geh3hl4v2e6/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>

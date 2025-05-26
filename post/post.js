@@ -74,6 +74,7 @@ $(document).ready(function () {
     ///////////////////////////////////////////////
 
     //addpost tinymce init
+    
     tinymce.init({
         selector: '#postContent',
         plugins: 'advlist link image lists table',
@@ -125,6 +126,13 @@ $(document).ready(function () {
             });
         }
     });
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     //updatepost tinymce init
     tinymce.init({
@@ -366,6 +374,9 @@ $(document).ready(function () {
 
         var faq = button.data('faq');
         $('#edit_faq').val(faq);
+
+        var alt_tag = button.data('alt_tag');
+        $('#edit_alt_tag').val(alt_tag);
 
         var thumb_img = button.data('thumb_image');
         if (!thumb_img === undefined || thumb_img === null) {

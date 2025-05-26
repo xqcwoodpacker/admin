@@ -105,13 +105,14 @@ if (!empty($_FILES["thumb_image"]["name"])) {
 $meta_description = htmlspecialchars($_POST['meta_description']);
 $meta_keywords = htmlspecialchars($_POST['meta_keywords']);
 $faq = htmlspecialchars($_POST['faq']);
+$alt_tag = htmlspecialchars($_POST['alt_tag']);
 
-$sql = "INSERT INTO posts (slug, title, category, content, thumb_img, meta_description, meta_keywords,faq_schema) 
-        VALUES (?,?,?,?,?,?,?,?)";
+$sql = "INSERT INTO posts (slug, title, category, content, thumb_img, meta_description, meta_keywords,faq_schema,alt_tag) 
+        VALUES (?,?,?,?,?,?,?,?,?)";
 
 
 if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("ssssssss", $slug, $title, $category, $content, $thumb_img, $meta_description, $meta_keywords, $faq); // Bind parameters
+    $stmt->bind_param("sssssssss", $slug, $title, $category, $content, $thumb_img, $meta_description, $meta_keywords, $faq, $alt_tag); // Bind parameters
 
     if ($stmt->execute()) {
         $post_id = $stmt->insert_id;  // Get the ID of the newly inserted post

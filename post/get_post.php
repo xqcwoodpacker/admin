@@ -53,7 +53,7 @@ if ($result->num_rows > 0) {
                 <a href='#updatePostModal'
 
                 data-id='" . $row['id'] . "'
-                data-content='" . $row['content'] . "'
+                data-content='" . htmlspecialchars($row['content']) . "'
                 data-title='" . $row['title'] . "'
                 data-slug='" . $row['slug'] . "'
                 data-category='" . $row['category'] . "'
@@ -61,6 +61,7 @@ if ($result->num_rows > 0) {
                 data-meta_description='" . $row['meta_description'] . "'
                 data-meta_keywords='" . $row['meta_keywords'] . "'
                 data-faq='" . $row['faq_schema'] . "'
+                data-alt_tag='" . $row['alt_tag'] . "'
                 data-thumb_image='" . $row['thumb_img'] . "'
 
                 class='btn btn-outline-warning' style='display: inline-block;margin-right: 10px;' data-bs-toggle='modal'>
@@ -82,4 +83,3 @@ if ($result->num_rows > 0) {
 } else {
     echo "<div class='alert alert-warning'>No posts found.</div>";
 }
-?>
